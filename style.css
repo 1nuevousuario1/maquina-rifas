@@ -71,30 +71,29 @@ nav a {
 .grid {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
-  gap: 6px;
+  gap: 5px;
   margin: 20px auto;
   max-width: 600px;
 }
-
 .numero {
-  background: #0078d7;
-  color: white;
+  background: #fff;
+  border: 2px solid #0078d7;
   border-radius: 5px;
   padding: 10px;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
 }
-.numero:hover {
-  background: #005fa3;
-}
 .numero.seleccionado {
-  background: #ffa500;
+  background: #0078d7;
+  color: white;
 }
 .numero.ocupado {
   background: #28a745;
+  color: white;
   pointer-events: none;
 }
+
 
 #finalizar {
   background: #ff7f00;
