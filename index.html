@@ -1,75 +1,109 @@
-<!-- 🔥 Firebase SDK y lógica -->
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-  import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Máquina de Rifas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Máquina de Rifas</h1>
+    <nav>
+      <a href="#">Inicio</a>
+      <a href="#">Mis Rifas</a>
+      <a href="#">Cómo Funciona</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </header>
 
-  // ⚙️ Configuración de tu proyecto Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDk...tu_api_key...",
-    authDomain: "maquina-rifas.firebaseapp.com",
-    projectId: "maquina-rifas",
-    storageBucket: "maquina-rifas.appspot.com",
-    messagingSenderId: "492909881871",
-    appId: "1:492909881871:web:abcdef123456"
-  };
+  <main>
+    <section id="premio">
+      <h2>Premio Destacado</h2>
+      <input type="file" id="imagenProducto">
+      <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+      <input type="number" id="precioNumero" placeholder="Precio por número">
+      <button id="guardarRifa">Guardar Rifa</button>
+    </section>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
+    <section id="cuadricula" class="grid">
+      <!-- Aquí se mostrarán las rifas -->
+    </section>
+  </main>
 
-  // Esperar a que el DOM esté listo antes de ejecutar
-  window.addEventListener("load", () => {
-    const guardarBtn = document.getElementById("guardarRifa");
-    const contenedor = document.getElementById("cuadricula");
+  <footer>
+    <button id="finalizar">Finalizar Rifa</button>
+  </footer>
 
-    // 📤 Subir imagen y guardar rifa
-    if (guardarBtn) {
-      guardarBtn.addEventListener("click", async () => {
-        const file = document.getElementById("imagenProducto").files[0];
-        const nombre = document.getElementById("nombreProducto").value;
-        const precio = document.getElementById("precioNumero").value;
+  <!-- 🔥 Firebase SDK y lógica -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-        if (!file || !nombre || !precio) {
-          alert("Completa todos los campos.");
-          return;
-        }
+    const firebaseConfig = {
+      apiKey: "AIzaSyDk...tu_api_key...",
+      authDomain: "maquina-rifas.firebaseapp.com",
+      projectId: "maquina-rifas",
+      storageBucket: "maquina-rifas.appspot.com",
+      messagingSenderId: "492909881871",
+      appId: "1:492909881871:web:abcdef123456"
+    };
 
-        const storageRef = ref(storage, "productos/" + file.name);
-        await uploadBytes(storageRef, file);
-        const url = await getDownloadURL(storageRef);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-        await addDoc(collection(db, "rifas"), {
-          nombre: nombre,
-          precio: parseFloat(precio),
-          imagenURL: url,
-          ocupados: []
+    window.addEventListener("load", () => {
+      const guardarBtn = document.getElementById("guardarRifa");
+      const contenedor = document.getElementById("cuadricula");
+
+      if (guardarBtn) {
+        guardarBtn.addEventListener("click", async () => {
+          const file = document.getElementById("imagenProducto").files[0];
+          const nombre = document.getElementById("nombreProducto").value;
+          const precio = document.getElementById("precioNumero").value;
+
+          if (!file || !nombre || !precio) {
+            alert("Completa todos los campos.");
+            return;
+          }
+
+          const storageRef = ref(storage, "productos/" + file.name);
+          await uploadBytes(storageRef, file);
+          const url = await getDownloadURL(storageRef);
+
+          await addDoc(collection(db, "rifas"), {
+            nombre: nombre,
+            precio: parseFloat(precio),
+            imagenURL: url,
+            ocupados: []
+          });
+
+          alert("Rifa guardada correctamente.");
+          mostrarRifas();
         });
+      }
 
-        alert("Rifa guardada correctamente.");
-        mostrarRifas();
-      });
-    }
+      async function mostrarRifas() {
+        if (!contenedor) return;
+        contenedor.innerHTML = "<p>Cargando rifas...</p>";
+        const querySnapshot = await getDocs(collection(db, "rifas"));
+        contenedor.innerHTML = "";
+        querySnapshot.forEach((doc) => {
+          const data = doc.data();
+          contenedor.innerHTML += `
+            <div class="rifa">
+              <h2>${data.nombre}</h2>
+              <img src="${data.imagenURL}" alt="${data.nombre}">
+              <p>Precio por número: $${data.precio}</p>
+            </div>
+          `;
+        });
+      }
 
-    // 📥 Mostrar rifas guardadas
-    async function mostrarRifas() {
-      if (!contenedor) return;
-      contenedor.innerHTML = "<p>Cargando rifas...</p>";
-      const querySnapshot = await getDocs(collection(db, "rifas"));
-      contenedor.innerHTML = "";
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        contenedor.innerHTML += `
-          <div class="rifa">
-            <h2>${data.nombre}</h2>
-            <img src="${data.imagenURL}" alt="${data.nombre}">
-            <p>Precio por número: $${data.precio}</p>
-          </div>
-        `;
-      });
-    }
-
-    mostrarRifas();
-  });
-</script>
+      mostrarRifas();
+    });
+  </script>
+</body>
+</html>
 
