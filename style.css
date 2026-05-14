@@ -263,6 +263,88 @@ nav a:hover {
 }
 
 /* =========================
+   📖 COMO FUNCIONA
+========================= */
+
+.como-funciona {
+
+  background: white;
+
+  width: 90%;
+
+  max-width: 900px;
+
+  margin: 30px auto;
+
+  padding: 30px;
+
+  border-radius: 15px;
+
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+.como-funciona h2 {
+
+  text-align: center;
+
+  color: #0078d7;
+
+  margin-bottom: 30px;
+
+}
+
+.pasos {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+
+  gap: 20px;
+
+}
+
+.paso {
+
+  background: #f8fbff;
+
+  border-radius: 12px;
+
+  padding: 20px;
+
+  text-align: center;
+
+  transition: 0.3s;
+
+}
+
+.paso:hover {
+
+  transform: translateY(-5px);
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+}
+
+.paso h3 {
+
+  color: #0078d7;
+
+  margin-bottom: 10px;
+
+}
+
+.paso p {
+
+  color: #555;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+}
+
+/* =========================
    📱 RESPONSIVE
 ========================= */
 
@@ -284,6 +366,10 @@ nav a:hover {
   nav a {
     display: inline-block;
     margin: 8px;
+  }
+
+  .pasos {
+    grid-template-columns: 1fr;
   }
 
 }
