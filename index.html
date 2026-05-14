@@ -16,24 +16,29 @@
     </nav>
   </header>
 
-  <main>
-    <section class="premio">
-      <h2>🎮 Consola PlayStation 5</h2>
-      <div class="premio-contenido">
-        <div class="imagen-premio">
-          <img id="preview" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/PlayStation_5_console_%28stand%29.jpg" alt="Producto">
-        </div>
-        <div class="detalles-premio">
-          <p class="destacado">Premio Destacado</p>
-          <p>¡Gana una Consola PS5!</p>
-          <p>Precio por número: <strong>$50</strong></p>
-          <input type="file" id="imagenProducto" accept="image/*">
-          <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-          <input type="number" id="precioNumero" placeholder="Precio por número">
-          <button id="guardarRifa">Guardar Rifa</button>
+<main>
+  <section class="premio">
+    <h2>Premio Actual</h2>
+    <div class="premio-contenido">
+      <!-- Vista previa de la imagen subida -->
+      <div class="imagen-premio">
+        <div id="preview">
+          <p style="color:#666;">No hay imagen seleccionada</p>
         </div>
       </div>
-    </section>
+
+      <!-- Datos del premio -->
+      <div class="detalles-premio">
+        <p class="destacado">Premio Destacado</p>
+        <input type="file" id="imagenProducto" accept="image/*">
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioNumero" placeholder="Precio por número">
+        <button id="guardarRifa">Guardar Rifa</button>
+      </div>
+    </div>
+  </section>
+</main>
+
 
     <section class="config">
       <h2>Elige tu número para participar</h2>
