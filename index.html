@@ -1,7 +1,3 @@
-<footer>
-  <button id="finalizar" onclick="finalizarRifa()">Finalizar Rifa</button>
-</footer>
-
 <!-- 🔥 Firebase SDK y lógica -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -22,50 +18,58 @@
   const db = getFirestore(app);
   const storage = getStorage(app);
 
-  // 📤 Subir imagen y guardar rifa
-  document.getElementById("guardarRifa").addEventListener("click", async () => {
-    const file = document.getElementById("imagenProducto").files[0];
-    const nombre = document.getElementById("nombreProducto").value;
-    const precio = document.getElementById("precioNumero").value;
+  // Esperar a que el DOM esté listo antes de ejecutar
+  window.addEventListener("load", () => {
+    const guardarBtn = document.getElementById("guardarRifa");
+    const contenedor = document.getElementById("cuadricula");
 
-    if (!file || !nombre || !precio) {
-      alert("Completa todos los campos.");
-      return;
+    // 📤 Subir imagen y guardar rifa
+    if (guardarBtn) {
+      guardarBtn.addEventListener("click", async () => {
+        const file = document.getElementById("imagenProducto").files[0];
+        const nombre = document.getElementById("nombreProducto").value;
+        const precio = document.getElementById("precioNumero").value;
+
+        if (!file || !nombre || !precio) {
+          alert("Completa todos los campos.");
+          return;
+        }
+
+        const storageRef = ref(storage, "productos/" + file.name);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+
+        await addDoc(collection(db, "rifas"), {
+          nombre: nombre,
+          precio: parseFloat(precio),
+          imagenURL: url,
+          ocupados: []
+        });
+
+        alert("Rifa guardada correctamente.");
+        mostrarRifas();
+      });
     }
 
-    const storageRef = ref(storage, "productos/" + file.name);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+    // 📥 Mostrar rifas guardadas
+    async function mostrarRifas() {
+      if (!contenedor) return;
+      contenedor.innerHTML = "<p>Cargando rifas...</p>";
+      const querySnapshot = await getDocs(collection(db, "rifas"));
+      contenedor.innerHTML = "";
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        contenedor.innerHTML += `
+          <div class="rifa">
+            <h2>${data.nombre}</h2>
+            <img src="${data.imagenURL}" alt="${data.nombre}">
+            <p>Precio por número: $${data.precio}</p>
+          </div>
+        `;
+      });
+    }
 
-    await addDoc(collection(db, "rifas"), {
-      nombre: nombre,
-      precio: parseFloat(precio),
-      imagenURL: url,
-      ocupados: []
-    });
-
-    alert("Rifa guardada correctamente.");
     mostrarRifas();
   });
-
-  // 📥 Mostrar rifas guardadas
-  async function mostrarRifas() {
-    const contenedor = document.getElementById("cuadricula");
-    contenedor.innerHTML = "";
-    const querySnapshot = await getDocs(collection(db, "rifas"));
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      contenedor.innerHTML += `
-        <div class="rifa">
-          <h2>${data.nombre}</h2>
-          <img src="${data.imagenURL}" alt="${data.nombre}">
-          <p>Precio por número: $${data.precio}</p>
-        </div>
-      `;
-    });
-  }
-
-  mostrarRifas();
 </script>
-</body>
-</html>
+
