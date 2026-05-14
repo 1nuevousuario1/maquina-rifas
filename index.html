@@ -7,7 +7,7 @@
 </head>
 <body>
   <header>
-    <h1>Máquina de Rifas</h1>
+    <h1>🎟️ Máquina de Rifas</h1>
     <nav>
       <a href="#">Inicio</a>
       <a href="#">Mis Rifas</a>
@@ -17,36 +17,29 @@
   </header>
 
   <main>
-    <section class="upload">
-      <label for="imagenProducto">Sube la imagen del producto:</label>
-      <input type="file" id="imagenProducto" accept="image/*">
-      <div id="preview"></div>
-      <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-      <input type="number" id="precioNumero" placeholder="Precio por número">
-      <button id="guardarRifa">Guardar Rifa</button>
+    <section class="premio">
+      <h2>🎮 Consola PlayStation 5</h2>
+      <div class="premio-contenido">
+        <div class="imagen-premio">
+          <img id="preview" src="https://upload.wikimedia.org/wikipedia/commons/8/8f/PlayStation_5_console_%28stand%29.jpg" alt="Producto">
+        </div>
+        <div class="detalles-premio">
+          <p class="destacado">Premio Destacado</p>
+          <p>¡Gana una Consola PS5!</p>
+          <p>Precio por número: <strong>$50</strong></p>
+          <input type="file" id="imagenProducto" accept="image/*">
+          <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+          <input type="number" id="precioNumero" placeholder="Precio por número">
+          <button id="guardarRifa">Guardar Rifa</button>
+        </div>
+      </div>
     </section>
 
     <section class="config">
-      <h2>Selecciona tipo de rifa</h2>
+      <h2>Elige tu número para participar</h2>
       <div class="botones">
         <button onclick="generarCuadricula(10)">Rifa de 10</button>
         <button onclick="generarCuadricula(20)">Rifa de 20</button>
         <button onclick="generarCuadricula(30)">Rifa de 30</button>
-        <button onclick="generarCuadricula(40)">Rifa de 40</button>
+        <button onclick="generarCuadricula(50)">Rifa de 50</button>
         <button onclick="generarCuadricula(100)">Rifa de 100</button>
-      </div>
-    </section>
-
-    <section id="cuadricula" class="grid">
-      <!-- Aquí se mostrarán los números -->
-    </section>
-  </main>
-
-  <footer>
-    <button id="finalizar" onclick="finalizarRifa()">Finalizar Rifa</button>
-  </footer>
-
-  <!-- 🔥 Firebase SDK y lógica -->
-  <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebase
