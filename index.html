@@ -5,9 +5,16 @@
   <title>🎟️ Máquina de Rifas</title>
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
+
+  <!-- =========================
+       HEADER
+  ========================== -->
+
   <header>
     <h1>🎟️ Máquina de Rifas</h1>
+
     <nav>
       <a href="#">Inicio</a>
       <a href="#">Mis Rifas</a>
@@ -16,57 +23,141 @@
     </nav>
   </header>
 
+  <!-- =========================
+       PREMIO
+  ========================== -->
+
   <main>
+
     <section class="premio">
+
       <h2>Premio Actual</h2>
+
       <div class="premio-contenido">
-        <!-- Vista previa de la imagen subida -->
+
+        <!-- Vista previa -->
+
         <div class="imagen-premio">
+
           <div id="preview">
-            <p style="color:#666;">No hay imagen seleccionada</p>
+
+            <p style="color:#666;">
+              No hay imagen seleccionada
+            </p>
+
           </div>
+
         </div>
 
-        <!-- Datos del premio -->
+        <!-- Datos premio -->
+
         <div class="detalles-premio">
-          <p class="destacado">Premio Destacado</p>
 
-          <!-- Input para subir imagen -->
-          <input type="file" id="imagenProducto" accept="image/*">
+          <p class="destacado">
+            Premio Destacado
+          </p>
 
-          <!-- Nombre y precio -->
-          <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-          <input type="number" id="precioNumero" placeholder="Precio por número">
+          <!-- Imagen -->
 
-          <!-- Botón para guardar -->
-          <button id="guardarRifa">Guardar Rifa</button>
+          <input
+            type="file"
+            id="imagenProducto"
+            accept="image/*"
+          >
+
+          <!-- Nombre -->
+
+          <input
+            type="text"
+            id="nombreProducto"
+            placeholder="Nombre del producto"
+          >
+
+          <!-- Precio -->
+
+          <input
+            type="number"
+            id="precioNumero"
+            placeholder="Precio por número"
+          >
+
+          <!-- Guardar -->
+
+          <button id="guardarRifa">
+            Guardar Rifa
+          </button>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
-  <!-- Configuración de rifas -->
+  <!-- =========================
+       CONFIGURACIÓN RIFA
+  ========================== -->
+
   <section class="config">
-    <h2>Elige tu número para participar</h2>
+
+    <h2>
+      Elige tu número para participar
+    </h2>
+
     <div class="botones">
-      <button onclick="generarCuadricula(10)">Rifa de 10</button>
-      <button onclick="generarCuadricula(20)">Rifa de 20</button>
-      <button onclick="generarCuadricula(30)">Rifa de 30</button>
-      <button onclick="generarCuadricula(50)">Rifa de 50</button>
-      <button onclick="generarCuadricula(100)">Rifa de 100</button>
+
+      <button onclick="generarCuadricula(10)">
+        Rifa de 10
+      </button>
+
+      <button onclick="generarCuadricula(20)">
+        Rifa de 20
+      </button>
+
+      <button onclick="generarCuadricula(30)">
+        Rifa de 30
+      </button>
+
+      <button onclick="generarCuadricula(50)">
+        Rifa de 50
+      </button>
+
+      <button onclick="generarCuadricula(100)">
+        Rifa de 100
+      </button>
+
     </div>
 
-    <!-- Aquí se dibuja la cuadrícula -->
+    <!-- Cuadrícula -->
+
     <section id="cuadricula" class="grid"></section>
 
-    <!-- Botón para finalizar -->
-    <button id="finalizar" onclick="finalizarRifa()">Confirmar Números</button>
+    <!-- Finalizar -->
+
+    <button id="finalizar" onclick="finalizarRifa()">
+      Confirmar Números
+    </button>
+
   </section>
 
-  <!-- Script cargado al final -->
-  <script src="script.js" defer></script>
+  <!-- =========================
+       FIREBASE
+  ========================== -->
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+
+  <!-- =========================
+       SCRIPT PRINCIPAL
+  ========================== -->
+
+  <script src="script.js"></script>
+
 </body>
 </html>
-
 
 
