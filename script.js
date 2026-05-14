@@ -33,6 +33,33 @@ window.addEventListener("load", () => {
           <img src="${reader.result}" alt="Producto" style="width:200px;border-radius:10px;display:block;margin:10px auto;">
           <p style="text-align:center;color:#28a745;font-weight:600;">✅ Imagen cargada correctamente</p>
         `;
+        // Ocultar mensaje después de unos segundos
+        setTimeout(() => {
+          const mensaje = preview.querySelector("p");
+          if (mensaje) mensaje.remove();
+        }, 3000);
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+});
+
+
+// 📷 Vista previa de imagen al seleccionar archivo
+window.addEventListener("load", () => {
+  const inputImagen = document.getElementById("imagenProducto");
+  if (inputImagen) {
+    inputImagen.addEventListener("change", function (e) {
+      const preview = document.getElementById("preview");
+      const file = e.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function () {
+        preview.innerHTML = `
+          <img src="${reader.result}" alt="Producto" style="width:200px;border-radius:10px;display:block;margin:10px auto;">
+          <p style="text-align:center;color:#28a745;font-weight:600;">✅ Imagen cargada correctamente</p>
+        `;
       };
       reader.readAsDataURL(file);
     });
