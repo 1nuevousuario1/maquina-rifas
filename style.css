@@ -52,3 +52,50 @@ button:hover {
   width: 100%;
   border-radius: 8px;
 }
+
+/* 🔢 Grid de números */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 5px;
+  margin: 20px auto;
+  max-width: 600px;
+}
+
+.numero {
+  background: #fff;
+  border: 2px solid #0078d7;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+}
+
+.numero.seleccionado {
+  background: #0078d7;
+  color: white;
+}
+
+.numero.ocupado {
+  background: #28a745; /* verde para ocupados */
+  color: white;
+}
+
+/* ✅ Botón Finalizar Rifa */
+#finalizar {
+  background: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin: 20px auto;
+  display: block;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+#finalizar:hover {
+  background-color: #218838;
+}
