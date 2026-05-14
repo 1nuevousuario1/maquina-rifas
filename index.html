@@ -17,14 +17,16 @@
   </nav>
 </header>
 
-<section class="upload">
-  <label for="imagenProducto">Sube la imagen del producto:</label>
-  <input type="file" id="imagenProducto" accept="image/*">
-  <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-  <input type="number" id="precioNumero" placeholder="Precio por número">
-  <button id="guardarRifa">Guardar Rifa</button>
-  <div id="preview"></div>
-</section>
+// ⚙️ Configuración de tu proyecto Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyDk...tu_api_key...",
+  authDomain: "maquina-rifas.firebaseapp.com",
+  projectId: "maquina-rifas",
+  storageBucket: "maquina-rifas.appspot.com",
+  messagingSenderId: "492909881871",
+  appId: "1:492909881871:web:abcdef123456"
+};
+
 
 <section class="config">
   <h2>Selecciona tipo de rifa</h2>
