@@ -118,10 +118,8 @@ async function finalizarRifa() {
   alert(`Rifa actualizada con números ocupados: ${numeros.join(", ")}`);
   mostrarRifas();
 }
-
-// 📥 Mostrar rifas guardadas con ocupados
 async function mostrarRifas() {
-  const contenedor = document.getElementById("cuadricula");
+  const contenedor = document.getElementById("rifas");
   contenedor.innerHTML = "<p>Cargando rifas...</p>";
   const querySnapshot = await getDocs(collection(db, "rifas"));
   contenedor.innerHTML = "";
@@ -132,9 +130,11 @@ async function mostrarRifas() {
         <h2>${data.nombre}</h2>
         <img src="${data.imagenURL}" alt="${data.nombre}">
         <p>Precio por número: $${data.precio}</p>
+        <div id="cuadricula-${doc.id}" class="grid"></div>
       </div>
     `;
     generarCuadricula(100, data.ocupados);
   });
 }
+
 
