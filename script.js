@@ -7,7 +7,6 @@ function generarCuadricula(cantidad, ocupados = []) {
     div.classList.add("numero");
     div.textContent = i;
 
-    // Si el número está ocupado en Firestore → marcar verde
     if (ocupados.includes(i.toString())) {
       div.classList.add("ocupado");
     } else {
@@ -100,18 +99,15 @@ async function finalizarRifa() {
     return;
   }
 
-  // Identificar la rifa activa (ejemplo: la última creada)
   const querySnapshot = await getDocs(collection(db, "rifas"));
   if (querySnapshot.empty) {
     alert("No hay rifas guardadas.");
     return;
   }
 
-  // Tomamos la primera rifa como ejemplo
   const rifaDoc = querySnapshot.docs[0];
   const rifaRef = rifaDoc.ref;
 
-  // Actualizamos el campo ocupados
   const data = rifaDoc.data();
   const nuevosOcupados = [...data.ocupados, ...numeros];
 
@@ -131,7 +127,6 @@ async function mostrarRifas() {
   contenedor.innerHTML = "";
   querySnapshot.forEach((doc) => {
     const data = doc.data();
-    // Mostrar tarjeta de la rifa
     contenedor.innerHTML += `
       <div class="rifa">
         <h2>${data.nombre}</h2>
@@ -139,7 +134,7 @@ async function mostrarRifas() {
         <p>Precio por número: $${data.precio}</p>
       </div>
     `;
-    // Generar cuadrícula con ocupados
     generarCuadricula(100, data.ocupados);
   });
 }
+
