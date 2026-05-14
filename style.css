@@ -80,7 +80,9 @@ button:hover {
 .numero.ocupado {
   background: #28a745; /* verde para ocupados */
   color: white;
+  pointer-events: none; /* no se puede volver a seleccionar */
 }
+
 
 /* ✅ Botón Finalizar Rifa */
 #finalizar {
