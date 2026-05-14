@@ -44,6 +44,51 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
+// 🔥 Firebase configuración
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDk...tu_api_key...",
+  authDomain: "maquina-rifas.firebaseapp.com",
+  projectId: "maquina-rifas",
+  storageBucket: "maquina-rifas.appspot.com",
+  messagingSenderId: "492909881871",
+  appId: "1:492909881871:web:abcdef123456"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+// 💾 Guardar rifa con imagen subida
+document.getElementById("guardarRifa").addEventListener("click", async () => {
+  const file = document.getElementById("imagenProducto").files[0];
+  const nombre = document.getElementById("nombreProducto").value;
+  const precio = document.getElementById("precioNumero").value;
+
+  if (!file || !nombre || !precio) {
+    alert("Completa todos los campos.");
+    return;
+  }
+
+  // Subir imagen a Firebase Storage
+  const storageRef = ref(storage, "productos/" + file.name);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+
+  // Guardar datos en Firestore
+  await addDoc(collection(db, "rifas"), {
+    nombre: nombre,
+    precio: parseFloat(precio),
+    imagenURL: url,
+    ocupados: []
+  });
+
+  alert("✅ Rifa guardada correctamente.");
+  mostrarRifas();
+});
 
 // 🚀 Finalizar rifa → guardar ocupados en Firestore
 async function finalizarRifa() {
@@ -98,3 +143,4 @@ async function mostrarRifas() {
     generarCuadricula(100, data.ocupados);
   });
 }
+
