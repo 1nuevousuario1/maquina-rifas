@@ -27,24 +27,40 @@
         </div>
       </div>
 
-      <!-- Datos del premio -->
-      <div class="detalles-premio">
-        <p class="destacado">Premio Destacado</p>
-        <input type="file" id="imagenProducto" accept="image/*">
-        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-        <input type="number" id="precioNumero" placeholder="Precio por número">
-        <button id="guardarRifa">Guardar Rifa</button>
-      </div>
-    </div>
-  </section>
+     <!-- Datos del premio -->
+<div class="detalles-premio">
+  <p class="destacado">Premio Destacado</p>
+
+  <!-- Input para subir imagen -->
+  <input type="file" id="imagenProducto" accept="image/*">
+  <!-- Vista previa -->
+  <div id="preview"></div>
+
+  <!-- Nombre y precio -->
+  <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+  <input type="number" id="precioNumero" placeholder="Precio por número">
+
+  <!-- Botón para guardar -->
+  <button id="guardarRifa">Guardar Rifa</button>
+</div>
+</div>
+</section>
 </main>
 
+<!-- Configuración de rifas -->
+<section class="config">
+  <h2>Elige tu número para participar</h2>
+  <div class="botones">
+    <button onclick="generarCuadricula(10)">Rifa de 10</button>
+    <button onclick="generarCuadricula(20)">Rifa de 20</button>
+    <button onclick="generarCuadricula(30)">Rifa de 30</button>
+    <button onclick="generarCuadricula(50)">Rifa de 50</button>
+    <button onclick="generarCuadricula(100)">Rifa de 100</button>
+  </div>
 
-    <section class="config">
-      <h2>Elige tu número para participar</h2>
-      <div class="botones">
-        <button onclick="generarCuadricula(10)">Rifa de 10</button>
-        <button onclick="generarCuadricula(20)">Rifa de 20</button>
-        <button onclick="generarCuadricula(30)">Rifa de 30</button>
-        <button onclick="generarCuadricula(50)">Rifa de 50</button>
-        <button onclick="generarCuadricula(100)">Rifa de 100</button>
+  <!-- Aquí se dibuja la cuadrícula -->
+  <section id="cuadricula" class="grid"></section>
+
+  <!-- Botón para finalizar -->
+  <button id="finalizar" onclick="finalizarRifa()">Confirmar Números</button>
+</section>
