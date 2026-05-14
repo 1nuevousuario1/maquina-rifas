@@ -4,62 +4,69 @@
   import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
   import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
-  // ⚙️ Configuración de tu proyecto Firebase
-  const firebaseConfig = {
-    apiKey: "AIzaSyDk...tu_api_key...",
-    authDomain: "maquina-rifas.firebaseapp.com",
-    projectId: "maquina-rifas",
-    storageBucket: "maquina-rifas.appspot.com",
-    messagingSenderId: "492909881871",
-    appId: "1:492909881871:web:abcdef123456"
-  };
+  document.addEventListener("DOMContentLoaded", () => {
+    // ⚙️ Configuración de tu proyecto Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyDk...tu_api_key...",
+      authDomain: "maquina-rifas.firebaseapp.com",
+      projectId: "maquina-rifas",
+      storageBucket: "maquina-rifas.appspot.com",
+      messagingSenderId: "492909881871",
+      appId: "1:492909881871:web:abcdef123456"
+    };
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-  const storage = getStorage(app);
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const storage = getStorage(app);
 
-  // 📤 Subir imagen y guardar rifa
-  document.getElementById("guardarRifa").addEventListener("click", async () => {
-    const file = document.getElementById("imagenProducto").files[0];
-    const nombre = document.getElementById("nombreProducto").value;
-    const precio = document.getElementById("precioNumero").value;
+    // 📤 Subir imagen y guardar rifa
+    const guardarBtn = document.getElementById("guardarRifa");
+    if (guardarBtn) {
+      guardarBtn.addEventListener("click", async () => {
+        const file = document.getElementById("imagenProducto").files[0];
+        const nombre = document.getElementById("nombreProducto").value;
+        const precio = document.getElementById("precioNumero").value;
 
-    if (!file || !nombre || !precio) {
-      alert("Completa todos los campos.");
-      return;
+        if (!file || !nombre || !precio) {
+          alert("Completa todos los campos.");
+          return;
+        }
+
+        const storageRef = ref(storage, "productos/" + file.name);
+        await uploadBytes(storageRef, file);
+        const url = await getDownloadURL(storageRef);
+
+        await addDoc(collection(db, "rifas"), {
+          nombre: nombre,
+          precio: parseFloat(precio),
+          imagenURL: url,
+          ocupados: []
+        });
+
+        alert("Rifa guardada correctamente.");
+        mostrarRifas();
+      });
     }
 
-    const storageRef = ref(storage, "productos/" + file.name);
-    await uploadBytes(storageRef, file);
-    const url = await getDownloadURL(storageRef);
+    // 📥 Mostrar rifas guardadas
+    async function mostrarRifas() {
+      const contenedor = document.getElementById("cuadricula");
+      if (!contenedor) return;
+      contenedor.innerHTML = "";
+      const querySnapshot = await getDocs(collection(db, "rifas"));
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        contenedor.innerHTML += `
+          <div class="rifa">
+            <h2>${data.nombre}</h2>
+            <img src="${data.imagenURL}" alt="${data.nombre}">
+            <p>Precio por número: $${data.precio}</p>
+          </div>
+        `;
+      });
+    }
 
-    await addDoc(collection(db, "rifas"), {
-      nombre: nombre,
-      precio: parseFloat(precio),
-      imagenURL: url,
-      ocupados: []
-    });
-
-    alert("Rifa guardada correctamente.");
     mostrarRifas();
   });
-
-  // 📥 Mostrar rifas guardadas
-  async function mostrarRifas() {
-    const contenedor = document.getElementById("cuadricula");
-    contenedor.innerHTML = "";
-    const querySnapshot = await getDocs(collection(db, "rifas"));
-    querySnapshot.forEach((doc) => {
-      const data = doc.data();
-      contenedor.innerHTML += `
-        <div class="rifa">
-          <h2>${data.nombre}</h2>
-          <img src="${data.imagenURL}" alt="${data.nombre}">
-          <p>Precio por número: $${data.precio}</p>
-        </div>
-      `;
-    });
-  }
-
-  mostrarRifas();
 </script>
+
