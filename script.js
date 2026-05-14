@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = () => {
         preview.innerHTML = `
-         <img src="${data.imagenURL}" alt="${data.nombre}">
-
+          <img src="${reader.result}" alt="Producto" style="width:220px;border-radius:10px;display:block;margin:10px auto;">
+          <p style="text-align:center;color:#28a745;font-weight:600;">✅ Imagen cargada correctamente</p>
         `;
         setTimeout(() => {
           const mensaje = preview.querySelector("p");
@@ -50,12 +50,12 @@ import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.c
 import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDk...tu_api_key...",
-  authDomain: "maquina-rifas.firebaseapp.com",
-  projectId: "maquina-rifas",
-  storageBucket: "maquina-rifas.appspot.com",
-  messagingSenderId: "492909881871",
-  appId: "1:492909881871:web:abcdef123456"
+  apiKey: "TU_API_KEY",
+  authDomain: "TU_PROJECT_ID.firebaseapp.com",
+  projectId: "TU_PROJECT_ID",
+  storageBucket: "TU_PROJECT_ID.appspot.com",
+  messagingSenderId: "TU_SENDER_ID",
+  appId: "TU_APP_ID"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -143,4 +143,3 @@ async function mostrarRifas() {
     generarCuadricula(100, data.ocupados);
   });
 }
-
