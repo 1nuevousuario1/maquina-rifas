@@ -31,8 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const reader = new FileReader();
       reader.onload = () => {
         preview.innerHTML = `
-          <img src="${reader.result}" alt="Producto" style="width:220px;border-radius:10px;display:block;margin:10px auto;">
-          <p style="text-align:center;color:#28a745;font-weight:600;">✅ Imagen cargada correctamente</p>
+         <img src="${data.imagenURL}" alt="${data.nombre}">
+
         `;
         setTimeout(() => {
           const mensaje = preview.querySelector("p");
