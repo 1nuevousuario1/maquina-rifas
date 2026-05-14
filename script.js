@@ -25,3 +25,4 @@ function finalizarRifa() {
   const numeros = Array.from(seleccionados).map(n => n.textContent);
   alert(`Rifa finalizada con números: ${numeros.join(", ")}`);
 }
+
