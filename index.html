@@ -1,21 +1,3 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Máquina de Rifas</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>🎟️ Máquina de Rifas</h1>
-    <nav>
-      <a href="#">Inicio</a>
-      <a href="#">Mis Rifas</a>
-      <a href="#">Cómo Funciona</a>
-      <a href="#">Contacto</a>
-    </nav>
-  </header>
-
 <main>
   <section class="premio">
     <h2>Premio Actual</h2>
@@ -27,24 +9,22 @@
         </div>
       </div>
 
-     <!-- Datos del premio -->
-<div class="detalles-premio">
-  <p class="destacado">Premio Destacado</p>
+      <!-- Datos del premio -->
+      <div class="detalles-premio">
+        <p class="destacado">Premio Destacado</p>
 
-  <!-- Input para subir imagen -->
-  <input type="file" id="imagenProducto" accept="image/*">
-  <!-- Vista previa -->
-  <div id="preview"></div>
+        <!-- Input para subir imagen -->
+        <input type="file" id="imagenProducto" accept="image/*">
 
-  <!-- Nombre y precio -->
-  <input type="text" id="nombreProducto" placeholder="Nombre del producto">
-  <input type="number" id="precioNumero" placeholder="Precio por número">
+        <!-- Nombre y precio -->
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioNumero" placeholder="Precio por número">
 
-  <!-- Botón para guardar -->
-  <button id="guardarRifa">Guardar Rifa</button>
-</div>
-</div>
-</section>
+        <!-- Botón para guardar -->
+        <button id="guardarRifa">Guardar Rifa</button>
+      </div>
+    </div>
+  </section>
 </main>
 
 <!-- Configuración de rifas -->
@@ -64,3 +44,5 @@
   <!-- Botón para finalizar -->
   <button id="finalizar" onclick="finalizarRifa()">Confirmar Números</button>
 </section>
+
+
