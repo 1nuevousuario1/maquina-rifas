@@ -58,22 +58,40 @@ imagenInput.addEventListener("change", function(e) {
 
 
 // ===============================
-// GUARDAR RIFA
+// GUARDAR RIFA REAL
 // ===============================
 
 const guardarBtn = document.getElementById("guardarRifa");
 
 guardarBtn.addEventListener("click", async () => {
 
-    const nombre = document.getElementById("nombreProducto").value;
+    const nombre =
+    document.getElementById("nombreProducto").value;
 
-    const precio = document.getElementById("precioNumero").value;
+    const precio =
+    document.getElementById("precioNumero").value;
 
-    const archivo = imagenInput.files[0];
+    const totalBoletos =
+    document.getElementById("totalBoletos").value;
 
-    // Validaciones
+    const valorPremio =
+    document.getElementById("valorPremio").value;
 
-    if(nombre === "" || precio === "") {
+    const descripcion =
+    document.getElementById("descripcionPremio").value;
+
+    const archivo =
+    imagenInput.files[0];
+
+    // ===============================
+    // VALIDACIONES
+    // ===============================
+
+    if(
+        nombre === "" ||
+        precio === "" ||
+        totalBoletos === ""
+    ) {
 
         alert("Completa todos los campos");
 
@@ -90,38 +108,75 @@ guardarBtn.addEventListener("click", async () => {
     try {
 
         // ===============================
-        // SUBIR IMAGEN A FIREBASE STORAGE
+        // SUBIR IMAGEN A STORAGE
         // ===============================
 
-        const nombreArchivo = Date.now() + "_" + archivo.name;
+        const nombreArchivo =
+        Date.now() + "_" + archivo.name;
 
-        const referencia = storage.ref("rifas/" + nombreArchivo);
+        const referencia =
+        storage.ref("rifas/" + nombreArchivo);
 
         await referencia.put(archivo);
 
         // Obtener URL
 
-        const imagenURL = await referencia.getDownloadURL();
+        const imagenURL =
+        await referencia.getDownloadURL();
 
         // ===============================
-        // GUARDAR EN FIRESTORE
+        // CREAR RIFA
         // ===============================
 
+        const nuevaRifa =
         await db.collection("rifas").add({
 
             nombre: nombre,
 
-            precio: precio,
+            precio: Number(precio),
+
+            totalBoletos: Number(totalBoletos),
+
+            valorPremio: Number(valorPremio),
+
+            descripcion: descripcion,
 
             imagen: imagenURL,
+
+            estado: "activa",
 
             fecha: new Date()
 
         });
 
-        alert("🎉 Rifa guardada en Firebase");
+        console.log("🎟️ Rifa creada:", nuevaRifa.id);
 
-        console.log("✅ Rifa guardada");
+        // ===============================
+        // CREAR BOLETOS REALES
+        // ===============================
+
+        for(let i = 1; i <= totalBoletos; i++) {
+
+            await db.collection("boletos").add({
+
+                numero: i,
+
+                estado: "disponible",
+
+                rifaId: nuevaRifa.id,
+
+                usuario: null,
+
+                fecha: new Date()
+
+            });
+
+            console.log("🎫 Boleto creado:", i);
+        }
+
+        alert("🎉 Rifa y boletos creados correctamente");
+
+        console.log("✅ Todo guardado en Firebase");
 
     } catch(error) {
 
@@ -134,7 +189,7 @@ guardarBtn.addEventListener("click", async () => {
 
 
 // ===============================
-// GENERAR CUADRÍCULA
+// GENERAR CUADRÍCULA VISUAL
 // ===============================
 
 const cuadricula = document.getElementById("cuadricula");
@@ -145,7 +200,8 @@ function generarCuadricula(cantidad) {
 
     for(let i = 1; i <= cantidad; i++) {
 
-        const numero = document.createElement("div");
+        const numero =
+        document.createElement("div");
 
         numero.classList.add("boleto");
 
@@ -168,7 +224,8 @@ function generarCuadricula(cantidad) {
 
 function finalizarRifa() {
 
-    const seleccionados = document.querySelectorAll(".boleto.seleccionado");
+    const seleccionados =
+    document.querySelectorAll(".boleto.seleccionado");
 
     let numeros = [];
 
@@ -185,5 +242,8 @@ function finalizarRifa() {
         return;
     }
 
-    alert("🎟️ Números seleccionados: " + numeros.join(", "));
+    alert(
+        "🎟️ Números seleccionados: " +
+        numeros.join(", ")
+    );
 }
