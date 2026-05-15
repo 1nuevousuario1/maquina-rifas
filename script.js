@@ -40,20 +40,56 @@ console.log("🔥 Firebase conectado");
 // VISTA PREVIA DE IMAGEN
 // ===============================
 
-imagenInput.addEventListener("change", function(e) {
+// ===============================
+// VISTA PREVIA DE IMAGEN
+// ===============================
+
+const imagenInput =
+document.getElementById("imagenProducto");
+
+const preview =
+document.getElementById("preview");
+
+imagenInput.addEventListener("change", (e) => {
 
     const archivo = e.target.files[0];
 
-    if (!archivo) return;
+    if (!archivo) {
+
+        preview.innerHTML = `
+            <p style="color:#666;">
+                No hay imagen seleccionada
+            </p>
+        `;
+
+        return;
+    }
+
+    // Crear URL local
 
     const imagenURL =
     URL.createObjectURL(archivo);
 
-    preview.innerHTML = `
-        <img src="${imagenURL}" class="preview-image">
-    `;
-});
+    // Crear imagen manualmente
 
+    const img =
+    document.createElement("img");
+
+    img.src = imagenURL;
+
+    img.classList.add("preview-image");
+
+    // Limpiar preview
+
+    preview.innerHTML = "";
+
+    // Insertar imagen
+
+    preview.appendChild(img);
+
+    console.log("🖼️ Imagen seleccionada");
+
+});
 
 // ===============================
 // GUARDAR RIFA REAL
