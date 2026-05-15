@@ -1,9 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>🎟️ Máquina de Rifas</title>
+
   <link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
@@ -11,20 +21,29 @@
   <!-- =========================
        HEADER
   ========================== -->
+
   <header>
+
     <h1>🎟️ Máquina de Rifas</h1>
 
     <nav>
+
       <a href="#">Inicio</a>
+
       <a href="#rifas">Mis Rifas</a>
+
       <a href="#como-funciona">Cómo Funciona</a>
+
       <a href="#">Contacto</a>
+
     </nav>
+
   </header>
 
   <!-- =========================
        PREMIO
   ========================== -->
+
   <main>
 
     <section class="premio">
@@ -34,67 +53,84 @@
       <div class="premio-contenido">
 
         <!-- =========================
-             VISTA PREVIA
+             PREVIEW
         ========================== -->
+
         <div class="imagen-premio">
 
           <div id="preview">
-            <p style="color:#666;">No hay imagen seleccionada</p>
+
+            <p style="color:#666;">
+              No hay imagen seleccionada
+            </p>
+
           </div>
 
         </div>
 
         <!-- =========================
-             DETALLES PREMIO
+             FORMULARIO
         ========================== -->
+
         <div class="detalles-premio">
 
-          <p class="destacado">Premio Destacado</p>
+          <p class="destacado">
+            Premio Destacado
+          </p>
 
-          <!-- Imagen -->
+          <!-- IMAGEN -->
+
           <input
             type="file"
             id="imagenProducto"
             accept="image/*"
           >
 
-          <!-- Nombre -->
+          <!-- NOMBRE -->
+
           <input
             type="text"
             id="nombreProducto"
             placeholder="Nombre del producto"
           >
 
-          <!-- Precio -->
+          <!-- PRECIO -->
+
           <input
             type="number"
             id="precioNumero"
             placeholder="Precio por número"
           >
 
-          <!-- NUEVO: TOTAL DE BOLETOS -->
+          <!-- TOTAL BOLETOS -->
+
           <input
             type="number"
             id="totalBoletos"
             placeholder="Cantidad total de boletos"
           >
 
-          <!-- Valor comercial -->
+          <!-- VALOR PREMIO -->
+
           <input
             type="number"
             id="valorPremio"
             placeholder="Valor comercial del premio"
           >
 
-          <!-- Descripción -->
+          <!-- DESCRIPCIÓN -->
+
           <textarea
             id="descripcionPremio"
-            placeholder="Describe el premio (ej. PlayStation 5 con dos controles)"
+            placeholder="Describe el premio"
           ></textarea>
 
-          <!-- Guardar -->
+          <!-- GUARDAR -->
+
           <button id="guardarRifa">
-            Guardar Rifa
+
+            🎟️ Guardar Rifa
+
           </button>
 
         </div>
@@ -106,8 +142,9 @@
   </main>
 
   <!-- =========================
-       CONFIGURACIÓN RIFA
+       CONFIGURACIÓN
   ========================== -->
+
   <section class="config">
 
     <h2>Elige tu número para participar</h2>
@@ -136,12 +173,22 @@
 
     </div>
 
-    <!-- CUADRÍCULA -->
-    <section id="cuadricula" class="grid"></section>
+    <!-- GRID -->
+
+    <section
+      id="cuadricula"
+      class="grid"
+    ></section>
 
     <!-- FINALIZAR -->
-    <button id="finalizar" onclick="finalizarRifa()">
+
+    <button
+      id="finalizar"
+      onclick="finalizarRifa()"
+    >
+
       Confirmar Números
+
     </button>
 
   </section>
@@ -149,38 +196,54 @@
   <!-- =========================
        CÓMO FUNCIONA
   ========================== -->
-  <section id="como-funciona" class="como-funciona">
+
+  <section
+    id="como-funciona"
+    class="como-funciona"
+  >
 
     <h2>🎰 ¿Cómo funciona la rifa?</h2>
 
     <div class="pasos">
 
       <div class="paso">
+
         <h3>1️⃣ Elige tus números</h3>
+
         <p>
-          Selecciona los números disponibles que deseas apartar.
+          Selecciona los números disponibles.
         </p>
+
       </div>
 
       <div class="paso">
-        <h3>2️⃣ Confirma tu participación</h3>
+
+        <h3>2️⃣ Confirma participación</h3>
+
         <p>
-          Presiona el botón “Confirmar Números”.
+          Presiona “Confirmar Números”.
         </p>
+
       </div>
 
       <div class="paso">
-        <h3>3️⃣ Realiza tu pago</h3>
+
+        <h3>3️⃣ Realiza el pago</h3>
+
         <p>
-          Envía tu comprobante para asegurar tus boletos.
+          Envía tu comprobante.
         </p>
+
       </div>
 
       <div class="paso">
+
         <h3>4️⃣ Espera el sorteo</h3>
+
         <p>
-          El ganador será anunciado en la fecha establecida.
+          El ganador será anunciado.
         </p>
+
       </div>
 
     </div>
@@ -188,8 +251,9 @@
   </section>
 
   <!-- =========================
-       INDICACIONES DE LA RIFA
+       INDICACIONES
   ========================== -->
+
   <section class="indicaciones">
 
     <h2>📋 Indicaciones de la Rifa</h2>
@@ -197,28 +261,28 @@
     <ul>
 
       <li>
-        <strong>Claridad del premio:</strong>
-        especificar exactamente qué se está rifando.
-      </li>
-
-      <li>
-        <strong>Valor proporcional:</strong>
-        el premio debe corresponder al número de boletos y precio.
+        <strong>Claridad:</strong>
+        especifica el premio correctamente.
       </li>
 
       <li>
         <strong>Transparencia:</strong>
-        mostrar foto real y comprobante del premio.
+        muestra fotos reales.
       </li>
 
       <li>
-        <strong>Disponibilidad inmediata:</strong>
-        el premio debe estar en posesión del organizador.
+        <strong>Disponibilidad:</strong>
+        debes tener el premio.
       </li>
 
       <li>
-        <strong>Atractivo emocional:</strong>
-        elegir algo deseable (electrónicos, experiencias, dinero).
+        <strong>Boletos:</strong>
+        cada número es único.
+      </li>
+
+      <li>
+        <strong>Sorteo:</strong>
+        anuncia fecha y reglas.
       </li>
 
     </ul>
@@ -228,11 +292,13 @@
   <!-- =========================
        RIFAS GUARDADAS
   ========================== -->
-  <section id="rifas" class="rifas">
+
+  <section
+    id="rifas"
+    class="rifas"
+  >
 
     <h2>🎲 Rifas Guardadas</h2>
-
-    <!-- Firebase renderizará aquí -->
 
   </section>
 
@@ -247,10 +313,11 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
   <!-- =========================
-       SCRIPT PRINCIPAL
+       SCRIPT
   ========================== -->
 
   <script src="script.js"></script>
 
 </body>
+
 </html>
