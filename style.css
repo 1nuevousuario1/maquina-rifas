@@ -372,4 +372,61 @@ nav a:hover {
     grid-template-columns: 1fr;
   }
 
+
+
+   /* =========================
+   🎲 RIFAS GUARDADAS
+========================= */
+
+.rifas {
+
+  width: 90%;
+
+  max-width: 1200px;
+
+  margin: 40px auto;
+
+}
+
+.tarjeta-rifa {
+
+  background: white;
+
+  border-radius: 15px;
+
+  padding: 20px;
+
+  margin-bottom: 25px;
+
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
+}
+
+.imagen-rifa {
+
+  width: 100%;
+
+  max-height: 300px;
+
+  object-fit: cover;
+
+  border-radius: 10px;
+
+  margin-bottom: 15px;
+
+}
+
+.tarjeta-rifa h3 {
+
+  color: #0078d7;
+
+  margin-bottom: 10px;
+
+}
+
+.tarjeta-rifa p {
+
+  margin: 8px 0;
+
+}
 }
