@@ -286,7 +286,6 @@ function generarCuadricula(cantidad) {
     }
 }
 
-
 // ===============================
 // FINALIZAR RIFA
 // ===============================
@@ -314,9 +313,11 @@ function finalizarRifa() {
     alert(
         "🎟️ Números seleccionados: " +
         numeros.join(", ")
+    );
+}
 
 
-        // ===============================
+// ===============================
 // MOSTRAR RIFAS DESDE FIREBASE
 // ===============================
 
@@ -405,5 +406,4 @@ async function cargarRifas() {
 // Ejecutar automáticamente
 
 cargarRifas();
-    );
 }
