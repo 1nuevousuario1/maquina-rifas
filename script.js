@@ -40,12 +40,6 @@ console.log("🔥 Firebase conectado");
 // VISTA PREVIA DE IMAGEN
 // ===============================
 
-const imagenInput =
-document.getElementById("imagenProducto");
-
-const preview =
-document.getElementById("preview");
-
 imagenInput.addEventListener("change", function(e) {
 
     const archivo = e.target.files[0];
