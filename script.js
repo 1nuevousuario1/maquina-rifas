@@ -4,21 +4,21 @@
 
 const firebaseConfig = {
 
-  apiKey: "AIzaSyDro83v9wZNYfY9N5NzrJH4eKrfDo1cVeM",
+    apiKey: "AIzaSyDro83v9wZNYfY9N5NzrJH4eKrfDo1cVeM",
 
-  authDomain: "maquina-rifas-new.firebaseapp.com",
+    authDomain: "maquina-rifas-new.firebaseapp.com",
 
-  databaseURL: "https://maquina-rifas-new-default-rtdb.firebaseio.com",
+    databaseURL: "https://maquina-rifas-new-default-rtdb.firebaseio.com",
 
-  projectId: "maquina-rifas-new",
+    projectId: "maquina-rifas-new",
 
-  storageBucket: "maquina-rifas-new.firebasestorage.app",
+    storageBucket: "maquina-rifas-new.firebasestorage.app",
 
-  messagingSenderId: "14102154747",
+    messagingSenderId: "14102154747",
 
-  appId: "1:14102154747:web:6ef2e73ec068a062aacf5e",
+    appId: "1:14102154747:web:6ef2e73ec068a062aacf5e",
 
-  measurementId: "G-64E3WC679C"
+    measurementId: "G-64E3WC679C"
 
 };
 
@@ -35,3 +35,255 @@ const db = firebase.firestore();
 const storage = firebase.storage();
 
 console.log("🔥 Firebase conectado");
+
+
+// ===============================
+// VISTA PREVIA DE IMAGEN
+// ===============================
+
+const imagenInput =
+document.getElementById("imagenProducto");
+
+const preview =
+document.getElementById("preview");
+
+imagenInput.addEventListener("change", function(e) {
+
+    const archivo = e.target.files[0];
+
+    if (!archivo) return;
+
+    const imagenURL =
+    URL.createObjectURL(archivo);
+
+    preview.innerHTML = `
+        <img src="${imagenURL}" class="preview-image">
+    `;
+});
+
+
+// ===============================
+// GUARDAR RIFA REAL
+// ===============================
+
+const guardarBtn =
+document.getElementById("guardarRifa");
+
+guardarBtn.addEventListener("click", async () => {
+
+    try {
+
+        // ===============================
+        // OBTENER DATOS
+        // ===============================
+
+        const nombre =
+        document.getElementById("nombreProducto").value;
+
+        const precio =
+        document.getElementById("precioNumero").value;
+
+        const totalBoletos =
+        document.getElementById("totalBoletos").value;
+
+        const valorPremio =
+        document.getElementById("valorPremio").value;
+
+        const descripcion =
+        document.getElementById("descripcionPremio").value;
+
+        const archivo =
+        imagenInput.files[0];
+
+        // ===============================
+        // VALIDACIONES
+        // ===============================
+
+        if(
+            nombre === "" ||
+            precio === "" ||
+            totalBoletos === ""
+        ) {
+
+            alert("⚠️ Completa todos los campos");
+
+            return;
+        }
+
+        if(!archivo) {
+
+            alert("⚠️ Debes subir una imagen");
+
+            return;
+        }
+
+        // ===============================
+        // SUBIR IMAGEN A FIREBASE STORAGE
+        // ===============================
+
+        const nombreArchivo =
+        Date.now() + "_" + archivo.name;
+
+        const referencia =
+        storage.ref("rifas/" + nombreArchivo);
+
+        await referencia.put(archivo);
+
+        // Obtener URL de imagen
+
+        const imagenURL =
+        await referencia.getDownloadURL();
+
+        console.log("🖼️ Imagen subida");
+
+        // ===============================
+        // CREAR RIFA
+        // ===============================
+
+        const nuevaRifa =
+        await db.collection("rifas").add({
+
+            nombre: nombre,
+
+            precio: Number(precio),
+
+            totalBoletos: Number(totalBoletos),
+
+            valorPremio: Number(valorPremio),
+
+            descripcion: descripcion,
+
+            imagen: imagenURL,
+
+            estado: "activa",
+
+            fecha: new Date()
+
+        });
+
+        console.log("🎟️ Rifa creada");
+
+        // ===============================
+        // CREAR BOLETOS REALES
+        // ===============================
+
+        for(let i = 1; i <= totalBoletos; i++) {
+
+            await db.collection("boletos").add({
+
+                numero: i,
+
+                estado: "disponible",
+
+                rifaId: nuevaRifa.id,
+
+                usuario: null,
+
+                fecha: new Date()
+
+            });
+
+            console.log("🎫 Boleto creado:", i);
+        }
+
+        // ===============================
+        // LIMPIAR FORMULARIO
+        // ===============================
+
+        document.getElementById("nombreProducto").value = "";
+
+        document.getElementById("precioNumero").value = "";
+
+        document.getElementById("totalBoletos").value = "";
+
+        document.getElementById("valorPremio").value = "";
+
+        document.getElementById("descripcionPremio").value = "";
+
+        imagenInput.value = "";
+
+        preview.innerHTML = `
+            <p style="color:#666;">
+                No hay imagen seleccionada
+            </p>
+        `;
+
+        // ===============================
+        // MENSAJE FINAL
+        // ===============================
+
+        alert("🎉 Rifa y boletos creados correctamente");
+
+        console.log("✅ Todo guardado en Firebase");
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("❌ Error al guardar la rifa");
+
+    }
+
+});
+
+
+// ===============================
+// GENERAR CUADRÍCULA
+// ===============================
+
+const cuadricula =
+document.getElementById("cuadricula");
+
+function generarCuadricula(cantidad) {
+
+    cuadricula.innerHTML = "";
+
+    for(let i = 1; i <= cantidad; i++) {
+
+        const numero =
+        document.createElement("div");
+
+        numero.classList.add("boleto");
+
+        numero.textContent = i;
+
+        numero.addEventListener("click", () => {
+
+            numero.classList.toggle("seleccionado");
+
+        });
+
+        cuadricula.appendChild(numero);
+    }
+}
+
+
+// ===============================
+// FINALIZAR RIFA
+// ===============================
+
+function finalizarRifa() {
+
+    const seleccionados =
+    document.querySelectorAll(".boleto.seleccionado");
+
+    let numeros = [];
+
+    seleccionados.forEach(boleto => {
+
+        numeros.push(boleto.textContent);
+
+    });
+
+    if(numeros.length === 0) {
+
+        alert("⚠️ No seleccionaste números");
+
+        return;
+    }
+
+    alert(
+        "🎟️ Números seleccionados: " +
+        numeros.join(", ")
+    );
+}
