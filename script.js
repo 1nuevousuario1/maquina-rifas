@@ -1,6 +1,7 @@
 // ===============================
 // FIREBASE
 // ===============================
+
 const firebaseConfig = {
 
     apiKey: "AIzaSyDro83v9wZNYfY9N5NzrJH4eKrfDo1cVeM",
@@ -40,10 +41,6 @@ console.log("🔥 Firebase conectado");
 // VISTA PREVIA DE IMAGEN
 // ===============================
 
-// ===============================
-// VISTA PREVIA DE IMAGEN
-// ===============================
-
 const imagenInput =
 document.getElementById("imagenProducto");
 
@@ -70,7 +67,7 @@ imagenInput.addEventListener("change", (e) => {
     const imagenURL =
     URL.createObjectURL(archivo);
 
-    // Crear imagen manualmente
+    // Crear imagen
 
     const img =
     document.createElement("img");
@@ -90,6 +87,7 @@ imagenInput.addEventListener("change", (e) => {
     console.log("🖼️ Imagen seleccionada");
 
 });
+
 
 // ===============================
 // GUARDAR RIFA REAL
@@ -156,9 +154,11 @@ guardarBtn.addEventListener("click", async () => {
         const referencia =
         storage.ref("rifas/" + nombreArchivo);
 
+        // Subir archivo
+
         await referencia.put(archivo);
 
-        // Obtener URL de imagen
+        // Obtener URL
 
         const imagenURL =
         await referencia.getDownloadURL();
@@ -193,7 +193,7 @@ guardarBtn.addEventListener("click", async () => {
         console.log("🎟️ Rifa creada");
 
         // ===============================
-        // CREAR BOLETOS REALES
+        // CREAR BOLETOS
         // ===============================
 
         for(let i = 1; i <= totalBoletos; i++) {
@@ -213,6 +213,7 @@ guardarBtn.addEventListener("click", async () => {
             });
 
             console.log("🎫 Boleto creado:", i);
+
         }
 
         // ===============================
@@ -236,6 +237,12 @@ guardarBtn.addEventListener("click", async () => {
                 No hay imagen seleccionada
             </p>
         `;
+
+        // ===============================
+        // RECARGAR RIFAS
+        // ===============================
+
+        cargarRifas();
 
         // ===============================
         // MENSAJE FINAL
@@ -283,8 +290,11 @@ function generarCuadricula(cantidad) {
         });
 
         cuadricula.appendChild(numero);
+
     }
+
 }
+
 
 // ===============================
 // FINALIZAR RIFA
@@ -308,12 +318,14 @@ function finalizarRifa() {
         alert("⚠️ No seleccionaste números");
 
         return;
+
     }
 
     alert(
         "🎟️ Números seleccionados: " +
         numeros.join(", ")
     );
+
 }
 
 
