@@ -2,341 +2,100 @@
 <html lang="es">
 
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>🎟️ Máquina de Rifas</title>
-
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-
   <!-- =========================
        HEADER
   ========================== -->
-
   <header>
-
     <h1>🎟️ Máquina de Rifas</h1>
-
     <nav>
-
       <a href="#">Inicio</a>
-
       <a href="#rifas">Mis Rifas</a>
-
       <a href="#como-funciona">Cómo Funciona</a>
-
       <a href="#">Contacto</a>
-
     </nav>
-
   </header>
 
   <!-- =========================
-       PREMIO
+       PANEL ADMINISTRADOR
   ========================== -->
-
-  <main>
-
-    <section class="premio">
-
-      <h2>Premio Actual</h2>
-
-      <div class="premio-contenido">
-
-        <!-- =========================
-             PREVIEW
-        ========================== -->
-
-        <div class="imagen-premio">
-
-          <div id="preview">
-
-            <p style="color:#666;">
-              No hay imagen seleccionada
-            </p>
-
-          </div>
-
+  <section id="adminPanel">
+    <h2>Premio Actual</h2>
+    <div class="premio-contenido">
+      <!-- PREVIEW -->
+      <div class="imagen-premio">
+        <div id="preview">
+          <p style="color:#666;">No hay imagen seleccionada</p>
         </div>
-
-        <!-- =========================
-             FORMULARIO
-        ========================== -->
-
-        <div class="detalles-premio">
-
-          <p class="destacado">
-            Premio Destacado
-          </p>
-
-          <!-- IMAGEN -->
-
-          <input
-            type="file"
-            id="imagenProducto"
-            accept="image/*"
-          >
-
-          <!-- NOMBRE -->
-
-          <input
-            type="text"
-            id="nombreProducto"
-            placeholder="Nombre del producto"
-          >
-
-          <!-- PRECIO -->
-
-          <input
-            type="number"
-            id="precioNumero"
-            placeholder="Precio por número"
-          >
-
-          <!-- TOTAL BOLETOS -->
-
-          <input
-            type="number"
-            id="totalBoletos"
-            placeholder="Cantidad total de boletos"
-          >
-
-          <!-- VALOR PREMIO -->
-
-          <input
-            type="number"
-            id="valorPremio"
-            placeholder="Valor comercial del premio"
-          >
-
-          <!-- DESCRIPCIÓN -->
-
-          <textarea
-            id="descripcionPremio"
-            placeholder="Describe el premio"
-          ></textarea>
-
-          <!-- GUARDAR -->
-
-          <button
-            type="button"
-            id="guardarRifa"
-          >
-
-            🎟️ Guardar Rifa
-
-          </button>
-
-        </div>
-
       </div>
 
-    </section>
-
-  </main>
+      <!-- FORMULARIO -->
+      <div class="detalles-premio">
+        <p class="destacado">Premio Destacado</p>
+        <input type="file" id="imagenProducto" accept="image/*">
+        <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+        <input type="number" id="precioNumero" placeholder="Precio por número">
+        <input type="number" id="totalBoletos" placeholder="Cantidad total de boletos">
+        <input type="number" id="valorPremio" placeholder="Valor comercial del premio">
+        <textarea id="descripcionPremio" placeholder="Describe el premio"></textarea>
+        <button type="button" id="guardarRifa">🎟️ Guardar Rifa</button>
+      </div>
+    </div>
+  </section>
 
   <!-- =========================
-       CONFIGURACIÓN
+       PANEL USUARIO
   ========================== -->
-
-  <section class="config">
-
-    <h2>Elige tu número para participar</h2>
-
-    <div class="botones">
-
-      <button
-        type="button"
-        onclick="generarCuadricula(10)"
-      >
-        Rifa de 10
-      </button>
-
-      <button
-        type="button"
-        onclick="generarCuadricula(20)"
-      >
-        Rifa de 20
-      </button>
-
-      <button
-        type="button"
-        onclick="generarCuadricula(30)"
-      >
-        Rifa de 30
-      </button>
-
-      <button
-        type="button"
-        onclick="generarCuadricula(50)"
-      >
-        Rifa de 50
-      </button>
-
-      <button
-        type="button"
-        onclick="generarCuadricula(100)"
-      >
-        Rifa de 100
-      </button>
-
-    </div>
-
-    <!-- GRID -->
-
-    <section
-      id="cuadricula"
-      class="grid"
-    ></section>
-
-    <!-- FINALIZAR -->
-
-    <button
-      type="button"
-      id="finalizar"
-      onclick="finalizarRifa()"
-    >
-
-      Confirmar Números
-
-    </button>
-
+  <section id="userPanel">
+    <h2>🎲 Rifas disponibles</h2>
+    <div id="rifas"></div>
+    <section id="cuadricula" class="grid"></section>
+    <button type="button" id="finalizar" onclick="finalizarRifa()">Confirmar Números</button>
   </section>
 
   <!-- =========================
        CÓMO FUNCIONA
   ========================== -->
-
-  <section
-    id="como-funciona"
-    class="como-funciona"
-  >
-
+  <section id="como-funciona" class="como-funciona">
     <h2>🎰 ¿Cómo funciona la rifa?</h2>
-
     <div class="pasos">
-
-      <div class="paso">
-
-        <h3>1️⃣ Elige tus números</h3>
-
-        <p>
-          Selecciona los números disponibles.
-        </p>
-
-      </div>
-
-      <div class="paso">
-
-        <h3>2️⃣ Confirma participación</h3>
-
-        <p>
-          Presiona “Confirmar Números”.
-        </p>
-
-      </div>
-
-      <div class="paso">
-
-        <h3>3️⃣ Realiza el pago</h3>
-
-        <p>
-          Envía tu comprobante.
-        </p>
-
-      </div>
-
-      <div class="paso">
-
-        <h3>4️⃣ Espera el sorteo</h3>
-
-        <p>
-          El ganador será anunciado.
-        </p>
-
-      </div>
-
+      <div class="paso"><h3>1️⃣ Elige tus números</h3><p>Selecciona los números disponibles.</p></div>
+      <div class="paso"><h3>2️⃣ Confirma participación</h3><p>Presiona “Confirmar Números”.</p></div>
+      <div class="paso"><h3>3️⃣ Realiza el pago</h3><p>Envía tu comprobante.</p></div>
+      <div class="paso"><h3>4️⃣ Espera el sorteo</h3><p>El ganador será anunciado.</p></div>
     </div>
-
   </section>
 
   <!-- =========================
        INDICACIONES
   ========================== -->
-
   <section class="indicaciones">
-
     <h2>📋 Indicaciones de la Rifa</h2>
-
     <ul>
-
-      <li>
-        <strong>Claridad:</strong>
-        especifica el premio correctamente.
-      </li>
-
-      <li>
-        <strong>Transparencia:</strong>
-        muestra fotos reales.
-      </li>
-
-      <li>
-        <strong>Disponibilidad:</strong>
-        debes tener el premio.
-      </li>
-
-      <li>
-        <strong>Boletos:</strong>
-        cada número es único.
-      </li>
-
-      <li>
-        <strong>Sorteo:</strong>
-        anuncia fecha y reglas.
-      </li>
-
+      <li><strong>Claridad:</strong> especifica el premio correctamente.</li>
+      <li><strong>Transparencia:</strong> muestra fotos reales.</li>
+      <li><strong>Disponibilidad:</strong> debes tener el premio.</li>
+      <li><strong>Boletos:</strong> cada número es único.</li>
+      <li><strong>Sorteo:</strong> anuncia fecha y reglas.</li>
     </ul>
-
-  </section>
-
-  <!-- =========================
-       RIFAS GUARDADAS
-  ========================== -->
-
-  <section
-    id="rifas"
-    class="rifas"
-  >
-
-    <h2>🎲 Rifas Guardadas</h2>
-
   </section>
 
   <!-- =========================
        FIREBASE SDK
   ========================== -->
-
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-
-  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js" defer></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js" defer></script>
 
   <!-- =========================
-       SCRIPT
+       SCRIPT PRINCIPAL
   ========================== -->
-
-  <script src="script.js"></script>
-
+  <script src="script.js" defer></script>
 </body>
-
 </html>
