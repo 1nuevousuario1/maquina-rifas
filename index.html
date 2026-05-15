@@ -13,10 +13,11 @@
   ========================== -->
   <header>
     <h1>🎟️ Máquina de Rifas</h1>
+
     <nav>
       <a href="#">Inicio</a>
-      <a href="#">Mis Rifas</a>
-      <a href="#">Cómo Funciona</a>
+      <a href="#rifas">Mis Rifas</a>
+      <a href="#como-funciona">Cómo Funciona</a>
       <a href="#">Contacto</a>
     </nav>
   </header>
@@ -25,94 +26,230 @@
        PREMIO
   ========================== -->
   <main>
+
     <section class="premio">
+
       <h2>Premio Actual</h2>
+
       <div class="premio-contenido">
-        <!-- Vista previa -->
+
+        <!-- =========================
+             VISTA PREVIA
+        ========================== -->
         <div class="imagen-premio">
+
           <div id="preview">
             <p style="color:#666;">No hay imagen seleccionada</p>
           </div>
+
         </div>
 
-        <!-- Datos premio -->
+        <!-- =========================
+             DETALLES PREMIO
+        ========================== -->
         <div class="detalles-premio">
+
           <p class="destacado">Premio Destacado</p>
 
           <!-- Imagen -->
-          <input type="file" id="imagenProducto" accept="image/*">
+          <input
+            type="file"
+            id="imagenProducto"
+            accept="image/*"
+          >
 
           <!-- Nombre -->
-          <input type="text" id="nombreProducto" placeholder="Nombre del producto">
+          <input
+            type="text"
+            id="nombreProducto"
+            placeholder="Nombre del producto"
+          >
 
           <!-- Precio -->
-          <input type="number" id="precioNumero" placeholder="Precio por número">
+          <input
+            type="number"
+            id="precioNumero"
+            placeholder="Precio por número"
+          >
+
+          <!-- NUEVO: TOTAL DE BOLETOS -->
+          <input
+            type="number"
+            id="totalBoletos"
+            placeholder="Cantidad total de boletos"
+          >
 
           <!-- Valor comercial -->
-          <input type="number" id="valorPremio" placeholder="Valor comercial del premio">
+          <input
+            type="number"
+            id="valorPremio"
+            placeholder="Valor comercial del premio"
+          >
 
-          <!-- Descripción clara -->
-          <textarea id="descripcionPremio" placeholder="Describe el premio (ej. PlayStation 5 con dos controles)"></textarea>
+          <!-- Descripción -->
+          <textarea
+            id="descripcionPremio"
+            placeholder="Describe el premio (ej. PlayStation 5 con dos controles)"
+          ></textarea>
 
           <!-- Guardar -->
-          <button id="guardarRifa">Guardar Rifa</button>
+          <button id="guardarRifa">
+            Guardar Rifa
+          </button>
+
         </div>
+
       </div>
+
     </section>
+
   </main>
 
   <!-- =========================
        CONFIGURACIÓN RIFA
   ========================== -->
   <section class="config">
+
     <h2>Elige tu número para participar</h2>
+
     <div class="botones">
-      <button onclick="generarCuadricula(10)">Rifa de 10</button>
-      <button onclick="generarCuadricula(20)">Rifa de 20</button>
-      <button onclick="generarCuadricula(30)">Rifa de 30</button>
-      <button onclick="generarCuadricula(50)">Rifa de 50</button>
-      <button onclick="generarCuadricula(100)">Rifa de 100</button>
+
+      <button onclick="generarCuadricula(10)">
+        Rifa de 10
+      </button>
+
+      <button onclick="generarCuadricula(20)">
+        Rifa de 20
+      </button>
+
+      <button onclick="generarCuadricula(30)">
+        Rifa de 30
+      </button>
+
+      <button onclick="generarCuadricula(50)">
+        Rifa de 50
+      </button>
+
+      <button onclick="generarCuadricula(100)">
+        Rifa de 100
+      </button>
+
     </div>
 
-    <!-- Cuadrícula -->
+    <!-- CUADRÍCULA -->
     <section id="cuadricula" class="grid"></section>
 
-    <!-- Finalizar -->
-    <button id="finalizar" onclick="finalizarRifa()">Confirmar Números</button>
+    <!-- FINALIZAR -->
+    <button id="finalizar" onclick="finalizarRifa()">
+      Confirmar Números
+    </button>
+
+  </section>
+
+  <!-- =========================
+       CÓMO FUNCIONA
+  ========================== -->
+  <section id="como-funciona" class="como-funciona">
+
+    <h2>🎰 ¿Cómo funciona la rifa?</h2>
+
+    <div class="pasos">
+
+      <div class="paso">
+        <h3>1️⃣ Elige tus números</h3>
+        <p>
+          Selecciona los números disponibles que deseas apartar.
+        </p>
+      </div>
+
+      <div class="paso">
+        <h3>2️⃣ Confirma tu participación</h3>
+        <p>
+          Presiona el botón “Confirmar Números”.
+        </p>
+      </div>
+
+      <div class="paso">
+        <h3>3️⃣ Realiza tu pago</h3>
+        <p>
+          Envía tu comprobante para asegurar tus boletos.
+        </p>
+      </div>
+
+      <div class="paso">
+        <h3>4️⃣ Espera el sorteo</h3>
+        <p>
+          El ganador será anunciado en la fecha establecida.
+        </p>
+      </div>
+
+    </div>
+
   </section>
 
   <!-- =========================
        INDICACIONES DE LA RIFA
   ========================== -->
   <section class="indicaciones">
+
     <h2>📋 Indicaciones de la Rifa</h2>
+
     <ul>
-      <li><strong>Claridad del premio:</strong> especificar exactamente qué se está rifando.</li>
-      <li><strong>Valor proporcional:</strong> el premio debe corresponder al número de boletos y precio.</li>
-      <li><strong>Transparencia:</strong> mostrar foto real y comprobante del premio.</li>
-      <li><strong>Disponibilidad inmediata:</strong> el premio debe estar en posesión del organizador.</li>
-      <li><strong>Atractivo emocional:</strong> elegir algo deseable (electrónicos, experiencias, dinero).</li>
+
+      <li>
+        <strong>Claridad del premio:</strong>
+        especificar exactamente qué se está rifando.
+      </li>
+
+      <li>
+        <strong>Valor proporcional:</strong>
+        el premio debe corresponder al número de boletos y precio.
+      </li>
+
+      <li>
+        <strong>Transparencia:</strong>
+        mostrar foto real y comprobante del premio.
+      </li>
+
+      <li>
+        <strong>Disponibilidad inmediata:</strong>
+        el premio debe estar en posesión del organizador.
+      </li>
+
+      <li>
+        <strong>Atractivo emocional:</strong>
+        elegir algo deseable (electrónicos, experiencias, dinero).
+      </li>
+
     </ul>
+
   </section>
 
   <!-- =========================
        RIFAS GUARDADAS
   ========================== -->
   <section id="rifas" class="rifas">
+
     <h2>🎲 Rifas Guardadas</h2>
-    <!-- Aquí se mostrarán las rifas desde Firestore -->
+
+    <!-- Firebase renderizará aquí -->
+
   </section>
 
   <!-- =========================
-       FIREBASE
+       FIREBASE SDK
   ========================== -->
+
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
 
   <!-- =========================
        SCRIPT PRINCIPAL
   ========================== -->
+
   <script src="script.js"></script>
 
 </body>
