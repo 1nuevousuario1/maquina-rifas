@@ -284,5 +284,96 @@ function finalizarRifa() {
     alert(
         "🎟️ Números seleccionados: " +
         numeros.join(", ")
+
+
+        // ===============================
+// MOSTRAR RIFAS DESDE FIREBASE
+// ===============================
+
+const contenedorRifas =
+document.getElementById("rifas");
+
+async function cargarRifas() {
+
+    try {
+
+        // Obtener rifas
+
+        const snapshot =
+        await db.collection("rifas")
+        .orderBy("fecha", "desc")
+        .get();
+
+        // Limpiar contenedor
+
+        contenedorRifas.innerHTML = `
+            <h2>🎲 Rifas Guardadas</h2>
+        `;
+
+        // Recorrer rifas
+
+        snapshot.forEach(doc => {
+
+            const rifa = doc.data();
+
+            // Crear tarjeta
+
+            const tarjeta =
+            document.createElement("div");
+
+            tarjeta.classList.add("tarjeta-rifa");
+
+            tarjeta.innerHTML = `
+
+                <img
+                    src="${rifa.imagen}"
+                    class="imagen-rifa"
+                >
+
+                <h3>${rifa.nombre}</h3>
+
+                <p>
+                    💵 Precio:
+                    $${rifa.precio}
+                </p>
+
+                <p>
+                    🎟️ Boletos:
+                    ${rifa.totalBoletos}
+                </p>
+
+                <p>
+                    🟢 Estado:
+                    ${rifa.estado}
+                </p>
+
+                <p>
+                    📦 Premio:
+                    $${rifa.valorPremio || 0}
+                </p>
+
+                <p>
+                    📝 ${rifa.descripcion || ""}
+                </p>
+
+            `;
+
+            contenedorRifas.appendChild(tarjeta);
+
+        });
+
+    } catch(error) {
+
+        console.error(error);
+
+        alert("❌ Error cargando rifas");
+
+    }
+
+}
+
+// Ejecutar automáticamente
+
+cargarRifas();
     );
 }
