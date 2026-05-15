@@ -1,7 +1,6 @@
 // ===============================
 // FIREBASE
 // ===============================
-
 const firebaseConfig = {
 
     apiKey: "AIzaSyDro83v9wZNYfY9N5NzrJH4eKrfDo1cVeM",
@@ -12,7 +11,7 @@ const firebaseConfig = {
 
     projectId: "maquina-rifas-new",
 
-    storageBucket: "maquina-rifas-new.firebasestorage.app",
+    storageBucket: "maquina-rifas-new.appspot.com",
 
     messagingSenderId: "14102154747",
 
