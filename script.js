@@ -62,31 +62,24 @@ imagenInput.addEventListener("change", (e) => {
         return;
     }
 
-    // Crear URL local
+const reader = new FileReader();
+reader.onload = () => {
+  preview.innerHTML = `
+    <img src="${reader.result}" 
+         alt="Imagen seleccionada" 
+         class="preview-image"
+         style="width:220px;border-radius:10px;display:block;margin:10px auto;box-shadow:0 2px 8px rgba(0,0,0,0.3);">
+    <p style="text-align:center;color:#28a745;font-weight:600;">
+      ✅ Imagen cargada correctamente
+    </p>
+  `;
+  setTimeout(() => {
+    const mensaje = preview.querySelector("p");
+    if (mensaje) mensaje.remove();
+  }, 3000);
+};
+reader.readAsDataURL(archivo);
 
-    const imagenURL =
-    URL.createObjectURL(archivo);
-
-    // Crear imagen
-
-    const img =
-    document.createElement("img");
-
-    img.src = imagenURL;
-
-    img.classList.add("preview-image");
-
-    // Limpiar preview
-
-    preview.innerHTML = "";
-
-    // Insertar imagen
-
-    preview.appendChild(img);
-
-    console.log("🖼️ Imagen seleccionada");
-
-});
 
 
 // ===============================
