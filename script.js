@@ -406,4 +406,3 @@ async function cargarRifas() {
 // Ejecutar automáticamente
 
 cargarRifas();
-}
